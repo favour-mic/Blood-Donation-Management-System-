@@ -1,159 +1,361 @@
+<?php
+
+require_once "db.php";
+
+/*
+|--------------------------------------------------------------------------
+| GET SEARCH VALUES
+|--------------------------------------------------------------------------
+*/
+
+$blood_group = trim($_GET["blood_group"] ?? "");
+$city = trim($_GET["city"] ?? "");
+
+$donors = [];
+
+
+/*
+|--------------------------------------------------------------------------
+| SEARCH DONORS
+|--------------------------------------------------------------------------
+*/
+
+$sql = "SELECT
+            donors.id,
+            users.name,
+            users.phone,
+            donors.blood_group,
+            donors.age,
+            donors.weight,
+            donors.city,
+            donors.last_donation_date,
+            donors.is_available
+        FROM donors
+        INNER JOIN users
+            ON donors.user_id = users.id
+        WHERE donors.is_available = TRUE";
+
+
+$params = [];
+$types = "";
+
+
+/*
+|--------------------------------------------------------------------------
+| BLOOD GROUP FILTER
+|--------------------------------------------------------------------------
+*/
+
+if ($blood_group !== "") {
+
+    $sql .= " AND donors.blood_group = ?";
+
+    $types .= "s";
+
+    $params[] = $blood_group;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CITY FILTER
+|--------------------------------------------------------------------------
+*/
+
+if ($city !== "") {
+
+    $sql .= " AND donors.city LIKE ?";
+
+    $types .= "s";
+
+    $params[] = "%" . $city . "%";
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ORDER RESULTS
+|--------------------------------------------------------------------------
+*/
+
+$sql .= " ORDER BY donors.city ASC";
+
+
+$stmt = $conn->prepare($sql);
+
+
+if (!$stmt) {
+    die("Database error: " . $conn->error);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ADD SEARCH PARAMETERS
+|--------------------------------------------------------------------------
+*/
+
+if (!empty($params)) {
+
+    $stmt->bind_param($types, ...$params);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| EXECUTE SEARCH
+|--------------------------------------------------------------------------
+*/
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+
+while ($row = $result->fetch_assoc()) {
+
+    $donors[] = $row;
+
+}
+
+
+$stmt->close();
+
+$conn->close();
+
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Search Donors - BDMS</title>
+
+    <!-- YOUR EXISTING CSS -->
+    <link rel="stylesheet" href="recipient.css">
+
+</head>
+
+
+<body>
+
+
 <main class="recipient-page">
 
     <section class="page-content">
 
-        <!-- PAGE TITLE -->
-        <h1 class="page-title">Search Donors</h1>
 
-        <!-- PAGE NAVIGATION -->
-        <div class="page-navigation">
-            <a href="search-donors.php" class="active">Find Donors</a>
-            <a href="submit-request.php">Submit Request</a>
-            <a href="my-request.php">My Requests</a>
+        <div class="page-label">
+            RECIPIENT
         </div>
 
 
-        <!-- SEARCH SECTION -->
-        <section class="search-section">
-
-            <form class="search-form" action="search-donors.php" method="GET">
-
-                <!-- BLOOD GROUP -->
-                <div class="form-group">
-                    <label for="blood_group">Blood Group</label>
-
-                    <select name="blood_group" id="blood_group">
-                        <option value="">Any</option>
-
-                        <option value="O+"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'O+') ? 'selected' : ''; ?>>
-                            O+
-                        </option>
-
-                        <option value="O-"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'O-') ? 'selected' : ''; ?>>
-                            O-
-                        </option>
-
-                        <option value="A+"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'A+') ? 'selected' : ''; ?>>
-                            A+
-                        </option>
-
-                        <option value="A-"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'A-') ? 'selected' : ''; ?>>
-                            A-
-                        </option>
-
-                        <option value="B+"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'B+') ? 'selected' : ''; ?>>
-                            B+
-                        </option>
-
-                        <option value="B-"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'B-') ? 'selected' : ''; ?>>
-                            B-
-                        </option>
-
-                        <option value="AB+"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'AB+') ? 'selected' : ''; ?>>
-                            AB+
-                        </option>
-
-                        <option value="AB-"
-                            <?php echo (($_GET['blood_group'] ?? '') === 'AB-') ? 'selected' : ''; ?>>
-                            AB-
-                        </option>
-
-                    </select>
-                </div>
+        <h1 class="page-title">
+            Search Donors
+        </h1>
 
 
-                <!-- CITY -->
-                <div class="form-group">
+        <!-- NAVIGATION -->
 
-                    <label for="city">City</label>
+        <div class="page-navigation">
 
-                    <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        placeholder="e.g. Buea"
-                        value="<?php echo htmlspecialchars($_GET['city'] ?? ''); ?>"
-                    >
+            <a href="search-donors.php"
+               class="page-nav-button active">
+                Find Donors
+            </a>
 
-                </div>
+            <a href="submit-request.php"
+               class="page-nav-button">
+                Submit Request
+            </a>
 
+            <a href="my-request.php"
+               class="page-nav-button">
+                My Requests
+            </a>
 
-                <!-- SEARCH BUTTON -->
-                <button type="submit" class="search-button">
-                    Search
-                </button>
-
-            </form>
-
-        </section>
+        </div>
 
 
-        <!-- SEARCH RESULT INFORMATION -->
-        <?php
+        <!-- SEARCH FORM -->
 
-        $blood_group = trim($_GET['blood_group'] ?? '');
-        $city = trim($_GET['city'] ?? '');
+        <form action="search-donors.php"
+              method="GET"
+              class="search-box">
 
-        ?>
 
-        <?php if ($blood_group !== '' || $city !== ''): ?>
+            <!-- BLOOD GROUP -->
 
-            <p class="result-information">
+            <div class="search-field">
 
-                <?php echo count($donors); ?>
+                <label for="blood-group">
+                    Blood Group
+                </label>
 
-                Available, eligible donor(s) found.
-                Contact details are shared only once a request is matched.
+                <select
+                    id="blood-group"
+                    name="blood_group">
 
-            </p>
+                    <option value="">
+                        Any
+                    </option>
 
-        <?php endif; ?>
+                    <option value="A+"
+                        <?php if ($blood_group === "A+") echo "selected"; ?>>
+                        A+
+                    </option>
+
+                    <option value="A-"
+                        <?php if ($blood_group === "A-") echo "selected"; ?>>
+                        A-
+                    </option>
+
+                    <option value="B+"
+                        <?php if ($blood_group === "B+") echo "selected"; ?>>
+                        B+
+                    </option>
+
+                    <option value="B-"
+                        <?php if ($blood_group === "B-") echo "selected"; ?>>
+                        B-
+                    </option>
+
+                    <option value="AB+"
+                        <?php if ($blood_group === "AB+") echo "selected"; ?>>
+                        AB+
+                    </option>
+
+                    <option value="AB-"
+                        <?php if ($blood_group === "AB-") echo "selected"; ?>>
+                        AB-
+                    </option>
+
+                    <option value="O+"
+                        <?php if ($blood_group === "O+") echo "selected"; ?>>
+                        O+
+                    </option>
+
+                    <option value="O-"
+                        <?php if ($blood_group === "O-") echo "selected"; ?>>
+                        O-
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- CITY -->
+
+            <div class="search-field">
+
+                <label for="city">
+                    City
+                </label>
+
+                <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value="<?php echo htmlspecialchars($city); ?>"
+                    placeholder="e.g. Buea">
+
+            </div>
+
+
+            <!-- SEARCH BUTTON -->
+
+            <button
+                type="submit"
+                class="search-button">
+
+                Search
+
+            </button>
+
+
+        </form>
+
+
+        <!-- RESULT COUNT -->
+
+        <p class="result-information">
+
+            <?php echo count($donors); ?>
+
+            Available, eligible donor(s) found.
+            Contact details are shared only once a request is matched.
+
+        </p>
 
 
         <!-- DONOR RESULTS -->
+
         <section class="donor-results">
 
-            <?php if (!empty($donors)): ?>
+
+            <?php if (count($donors) > 0): ?>
+
 
                 <?php foreach ($donors as $donor): ?>
 
+
                     <article class="donor-card">
 
-                        <!-- AVAILABILITY -->
+
                         <div class="availability">
-                            AVAILABLE
+
+                            <?php
+                            if ($donor["is_available"]) {
+                                echo "AVAILABLE";
+                            }
+                            ?>
+
                         </div>
 
 
-                        <!-- CITY -->
                         <div class="donor-location">
-                            <?php echo htmlspecialchars($donor['city']); ?>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $donor["city"]
+                            );
+                            ?>
+
                         </div>
 
 
-                        <!-- LAST DONATION -->
                         <div class="donor-date">
 
                             Last donation:
 
                             <?php
 
-                            if (!empty($donor['last_donation_date'])) {
+                            if (
+                                !empty(
+                                    $donor["last_donation_date"]
+                                )
+                            ) {
 
                                 echo htmlspecialchars(
-                                    $donor['last_donation_date']
+                                    date(
+                                        "M d, Y",
+                                        strtotime(
+                                            $donor["last_donation_date"]
+                                        )
+                                    )
                                 );
 
                             } else {
 
-                                echo 'Not available';
+                                echo "Not available";
 
                             }
 
@@ -162,37 +364,53 @@
                         </div>
 
 
-                        <!-- BLOOD GROUP -->
                         <div class="donor-blood">
-                            <?php echo htmlspecialchars($donor['blood_group']); ?>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $donor["blood_group"]
+                            );
+                            ?>
+
                         </div>
 
 
-                        <!-- REQUEST BUTTON -->
                         <button
                             type="button"
-                            class="request-button"
-                        >
+                            class="request-button">
+
                             Request This Type
+
                         </button>
 
+
                     </article>
+
 
                 <?php endforeach; ?>
 
 
-            <?php elseif ($blood_group !== '' || $city !== ''): ?>
+            <?php else: ?>
 
-                <!-- NO RESULTS -->
-                <p class="no-results">
-                    No available donors found.
-                </p>
+
+                <div class="no-results">
+
+                    No available donors found matching your search.
+
+                </div>
 
 
             <?php endif; ?>
 
+
         </section>
+
 
     </section>
 
 </main>
+
+
+</body>
+
+</html>
