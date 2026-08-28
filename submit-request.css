@@ -1,0 +1,490 @@
+/* =========================================================
+   BDMS RECIPIENT MODULE
+   SUBMIT A BLOOD REQUEST
+   FRONTEND ONLY
+   ========================================================= */
+
+
+/* ---------- RESET ---------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    overflow-x: hidden;
+}
+
+
+/* ---------- MAIN PAGE ---------- */
+
+.submit-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #ffffff;
+}
+
+
+.submit-content {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 55px 40px 70px;
+}
+
+
+/* ---------- TITLE ---------- */
+
+.submit-title {
+    display: inline-block;
+
+    position: relative;
+
+    margin-bottom: 25px;
+
+    color: #080808;
+
+    font-size: clamp(32px, 4vw, 48px);
+
+    line-height: 1.1;
+
+    font-weight: 800;
+}
+
+
+.submit-title::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -6px;
+
+    width: 0;
+
+    height: 4px;
+
+    background: #079cff;
+
+    transition: width 0.35s ease;
+}
+
+
+.submit-title:hover::after {
+    width: 100%;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+.request-navigation {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 0;
+
+    margin-bottom: 35px;
+}
+
+
+.request-nav-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 34px;
+
+    padding: 7px 16px;
+
+    border: 1px solid #bdbdbd;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.request-nav-button:hover {
+    background: #160909;
+
+    color: #ffffff;
+
+    border-color: #160909;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+
+.request-nav-button.active {
+    background: #160909;
+
+    color: #ffffff;
+
+    border-color: #160909;
+}
+
+
+.request-nav-button:active {
+    transform: translateY(0);
+}
+
+
+/* ---------- FORM CARD ---------- */
+
+.request-form-card {
+    width: 100%;
+
+    max-width: 600px;
+
+    margin: 30px auto 0;
+
+    padding: 28px;
+
+    border: 1px solid #d0d0d0;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.request-form-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+
+/* ---------- FORM GROUP ---------- */
+
+.form-group {
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+/* ---------- INPUT ROW ---------- */
+
+.blood-input-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+}
+
+
+/* ---------- INPUTS ---------- */
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid #c8c8c8;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #555555;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #999999;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #079cff;
+
+    box-shadow:
+        0 0 0 3px rgba(7, 156, 255, 0.12);
+
+    transform: translateY(-1px);
+}
+
+
+/* ---------- BLOOD GROUP LEFT SIDE ---------- */
+
+.blood-input-row select {
+    border-radius: 6px 0 0 6px;
+}
+
+
+/* ---------- UNITS RIGHT SIDE ---------- */
+
+.blood-input-row input {
+    border-radius: 0 6px 6px 0;
+
+    border-left: none;
+}
+
+
+/* ---------- SUBMIT BUTTON ---------- */
+
+.submit-request-button {
+    display: block;
+
+    width: 100%;
+
+    height: 42px;
+
+    margin-top: 8px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #c00000;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.submit-request-button:hover {
+    background: #970000;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 18px rgba(192, 0, 0, 0.25);
+}
+
+
+.submit-request-button:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* ---------- FORM MICRO INTERACTION ---------- */
+
+.form-group {
+    transition: transform 0.25s ease;
+}
+
+
+.form-group:focus-within {
+    transform: translateX(2px);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .submit-content {
+        padding: 45px 25px 60px;
+    }
+
+
+    .request-form-card {
+        max-width: 600px;
+    }
+
+}
+
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .submit-content {
+        padding: 35px 18px 50px;
+    }
+
+
+    .submit-title {
+        font-size: 34px;
+
+        margin-bottom: 24px;
+    }
+
+
+    .request-navigation {
+        width: 100%;
+
+        gap: 5px;
+
+        margin-bottom: 28px;
+    }
+
+
+    .request-nav-button {
+        flex: 1;
+
+        padding: 8px 8px;
+
+        font-size: 11px;
+
+        white-space: nowrap;
+    }
+
+
+    .request-form-card {
+        width: 100%;
+
+        margin-top: 20px;
+
+        padding: 20px;
+    }
+
+
+    .blood-input-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    .blood-input-row select {
+        border-radius: 6px;
+    }
+
+
+    .blood-input-row input {
+        margin-top: 8px;
+
+        border-left: 1px solid #c8c8c8;
+
+        border-radius: 6px;
+    }
+
+
+    .form-group {
+        margin-bottom: 17px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .submit-content {
+        padding-left: 14px;
+
+        padding-right: 14px;
+    }
+
+
+    .submit-title {
+        font-size: 30px;
+    }
+
+
+    .request-navigation {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .request-nav-button {
+        width: 100%;
+    }
+
+
+    .request-form-card {
+        padding: 17px;
+    }
+
+}
