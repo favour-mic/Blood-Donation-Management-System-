@@ -1,0 +1,117 @@
+
+.footer-contain {
+    background: var(--NeutralInk);
+    position: relative;
+    width: 100%;
+    margin-top: 5rem;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(circle at 8% 5%, rgba(153, 0, 17, 0.25), transparent 30%),
+        linear-gradient(135deg, #241A1B 0%, #1b1415 100%);
+}
+.foot-container {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    margin: 0 auto;
+    gap: 2rem;
+    width: min(1200px, 92%);
+    line-height: 1.6rem;
+    padding: 3.5rem 2rem 2.5rem;
+}
+.fc1 p {
+    max-width: 32ch;
+    margin-top: 0.6rem;
+}
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-family: var(--font-family1);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+.footer-logo i {
+    color: var(--cherry-primary);
+}
+.footer-contain ul li {
+    margin-bottom: 0.6rem;
+}
+.footer-contain a {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: var(--NeutralMuted);
+}
+.footer-contain a:hover {
+    color: #ffffff;
+}
+.footer-contain h3 {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+.footer-contain p {
+    color: var(--NeutralMuted);
+}
+.footer-bottom {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, .12);
+}
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1.2rem 0;
+    font-size: 0.85rem;
+    color: var(--NeutralMuted);
+}
+.copyright span {
+    color: var(--cherry-primary);
+}
+.footer-socials {
+    display: flex;
+    gap: 0.9rem;
+}
+.footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    transition: background .2s ease, transform .2s ease;
+}
+.footer-socials a:hover {
+    background: var(--cherry-primary);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .footer-contain {
+        margin-top: 3rem;
+    }
+    .foot-container {
+        display: grid;
+        gap: 2.2rem;
+        padding: 3rem 0 1rem;
+        grid-template-columns: 1fr;
+    }
+    .copyright {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.4rem 0 calc(1.2rem + env(safe-area-inset-bottom, 0px));
+    }
+}
