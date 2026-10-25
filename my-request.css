@@ -1,0 +1,564 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f7f7;
+    color: #111111;
+}
+
+
+/* ---------- MAIN PAGE ---------- */
+
+.my-request-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 0 8.5%;
+}
+
+
+/* ---------- INTRO SECTION ---------- */
+
+.request-intro {
+    width: 100%;
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+
+.request-intro h1 {
+    display: inline-block;
+    position: relative;
+
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 700;
+
+    margin-bottom: 32px;
+
+    cursor: default;
+
+    transition:
+        transform 0.25s ease,
+        letter-spacing 0.25s ease;
+}
+
+
+/* Blue underline from the wireframe */
+
+.request-intro h1::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    bottom: -5px;
+
+    width: 100%;
+    height: 4px;
+
+    background: #0099ff;
+
+    transition:
+        width 0.3s ease,
+        height 0.3s ease;
+}
+
+
+.request-intro h1:hover {
+    transform: translateY(-2px);
+    letter-spacing: 0.2px;
+}
+
+
+.request-intro h1:hover::after {
+    width: 70%;
+    height: 5px;
+}
+
+
+/* ---------- PAGE NAVIGATION ---------- */
+
+.page-navigation {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 0;
+
+    width: fit-content;
+}
+
+
+.page-nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 105px;
+    min-height: 36px;
+
+    padding: 8px 17px;
+
+    border: 1px solid #b8b8b8;
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* Buttons slightly overlap like the wireframe */
+
+.page-nav-button + .page-nav-button {
+    margin-left: -1px;
+}
+
+
+/* Hover effect */
+
+.page-nav-button:hover {
+    background: #eeeeee;
+    border-color: #777777;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Active My Requests button */
+
+.page-nav-button.active {
+    background: #210707;
+    color: #ffffff;
+    border-color: #210707;
+}
+
+
+/* Active hover */
+
+.page-nav-button.active:hover {
+    background: #3a0909;
+    color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 15px rgba(33, 7, 7, 0.25);
+}
+
+
+/* ---------- REQUESTS CONTAINER ---------- */
+
+.requests-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 25px;
+
+    padding-bottom: 30px;
+}
+
+
+/* ---------- REQUEST CARD ---------- */
+
+.request-card {
+    width: 100%;
+
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    padding: 23px 26px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* Professional hover effect */
+
+.request-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #a9a9a9;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ---------- REQUEST TOP ---------- */
+
+.request-top {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.request-information h2 {
+    font-size: 15px;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+    cursor: default;
+
+    transition: transform 0.2s ease;
+}
+
+
+.request-card:hover .request-information h2 {
+    transform: translateX(3px);
+}
+
+
+.request-information p {
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #999999;
+
+    line-height: 1.5;
+}
+
+
+/* ---------- URGENCY LABELS ---------- */
+
+.urgency {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 115px;
+
+    padding: 9px 17px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.request-card:hover .urgency {
+    transform: scale(1.04);
+}
+
+
+.urgency.high {
+    background: #ffd4d4;
+    color: #c00000;
+}
+
+
+.urgency.medium {
+    background: #dce8ff;
+    color: #1558c0;
+}
+
+
+/* ---------- PROGRESS AREA ---------- */
+
+.request-progress {
+    width: 100%;
+
+    margin-top: 20px;
+}
+
+
+/* Progress line */
+
+.progress-line {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 3px;
+}
+
+
+.progress-segment {
+    height: 7px;
+
+    flex: 1;
+
+    border-radius: 10px;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+/* Red completed progress */
+
+.progress-segment.completed {
+    background: #c00000;
+}
+
+
+/* Light red remaining progress */
+
+.progress-segment.pending {
+    background: #f1dada;
+}
+
+
+/* Small hover movement */
+
+.request-card:hover .progress-segment.completed {
+    transform: scaleY(1.25);
+}
+
+
+/* ---------- PROGRESS LABELS ---------- */
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+
+.progress-labels span {
+    width: 33.333%;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+.progress-labels span:nth-child(2) {
+    text-align: center;
+}
+
+
+.progress-labels span:nth-child(3) {
+    text-align: right;
+}
+
+
+.progress-labels .inactive-label {
+    color: #aaaaaa;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .my-request-page {
+        padding: 0 6%;
+    }
+
+
+    .request-intro {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+
+
+    .request-intro h1 {
+        font-size: 36px;
+    }
+
+
+    .request-card {
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .my-request-page {
+        padding: 0 20px;
+    }
+
+
+    .request-intro {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+
+    .request-intro h1 {
+        font-size: 31px;
+    }
+
+
+    /* Navigation becomes mobile friendly */
+
+    .page-navigation {
+        width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 7px;
+    }
+
+
+    .page-nav-button {
+        min-width: 0;
+
+        flex: 1;
+
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
+
+    .page-nav-button + .page-nav-button {
+        margin-left: 0;
+    }
+
+
+    /* Request card */
+
+    .request-card {
+        padding: 18px;
+
+        border-radius: 8px;
+    }
+
+
+    .request-top {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .request-information h2 {
+        font-size: 14px;
+    }
+
+
+    .request-information p {
+        font-size: 12px;
+    }
+
+
+    .urgency {
+        align-self: flex-start;
+
+        min-width: auto;
+
+        padding: 8px 14px;
+
+        font-size: 10px;
+    }
+
+
+    .progress-line {
+        gap: 2px;
+    }
+
+
+    .progress-segment {
+        height: 6px;
+    }
+
+
+    .progress-labels span {
+        font-size: 11px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .my-request-page {
+        padding: 0 14px;
+    }
+
+
+    .request-intro h1 {
+        font-size: 27px;
+    }
+
+
+    .page-nav-button {
+        font-size: 11px;
+        padding: 8px 6px;
+    }
+
+
+    .request-card {
+        padding: 15px;
+    }
+
+
+    .progress-labels span {
+        font-size: 10px;
+    }
+
+}
