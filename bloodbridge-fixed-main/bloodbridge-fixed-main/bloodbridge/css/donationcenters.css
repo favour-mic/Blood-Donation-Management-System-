@@ -1,0 +1,117 @@
+
+.don-center {
+    width: min(var(--content-max), 92%);
+    margin: 0 auto;
+    padding: var(--section-padding) 0;
+}
+.don-center-div1 {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3rem;
+}
+.don-p1 {
+    color: var(--NeutralMuted);
+    margin-top: 0.5rem;
+    font-size: 1.02rem;
+}
+
+.don-center-div2 {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.sub-don-center-div1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+.subs {
+    background: #fff;
+    border: 1px solid var(--NeutralBorder);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.subs:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+.subs h5 {
+    font-family: var(--font-family1);
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    margin-bottom: 0.3rem;
+}
+.don-p2 {
+    color: var(--NeutralMuted);
+    font-size: 0.92rem;
+    text-transform: capitalize;
+}
+.subs .verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.32rem 0.85rem;
+    border-radius: 999rem;
+    background: rgba(30, 123, 77, 0.12);
+    color: var(--StatusSuccess);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+.subs .verified::before {
+    content: "\f00c";
+    font-family: "Font Awesome 7 Free";
+    font-weight: 900;
+}
+
+.sub-don-center-div2 {
+    background: var(--CherryLight);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+}
+.sub-don-center-div2 h5 {
+    font-family: var(--font-family1);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--cherry-primary);
+    margin-top: 1.4rem;
+    margin-bottom: 0.35rem;
+}
+.sub-don-center-div2 h5:first-child {
+    margin-top: 0;
+}
+.don-p3 {
+    font-size: 0.95rem;
+    color: var(--NeutralBody);
+    line-height: 1.55;
+}
+.sub-don-center-div2 .btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 1.75rem;
+}
+
+@media (max-width: 900px) {
+    .don-center-div2 {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 480px) {
+    .subs {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

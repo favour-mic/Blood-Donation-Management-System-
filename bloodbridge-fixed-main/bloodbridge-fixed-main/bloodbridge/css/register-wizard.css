@@ -1,0 +1,404 @@
+/* Registration wizard styling follows the shared login-page design system. */
+:root {
+  color-scheme: light;
+  --wizard-ink: #242424;
+  --wizard-muted: #777;
+  --wizard-paper: #f7f7f5;
+  --wizard-line: #eee8e2;
+  --wizard-accent: #990011;
+  --wizard-accent-dark: #5c000a;
+  --wizard-accent-soft: #f7e4e4;
+  --wizard-shadow: 0 8px 35px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: #f7f7f5;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f7f7f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.register-wizard-page {
+  display: grid;
+  min-height: calc(100vh - 82px);
+  place-items: center;
+  padding: 50px 20px 70px;
+  background: #f7f7f5;
+}
+
+.register-wizard {
+  width: min(100%, 700px);
+  padding: clamp(25px, 5vw, 40px);
+  border: 1px solid #eee8e2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--wizard-shadow);
+}
+
+.register-heading {
+  margin-bottom: 21px;
+}
+
+.register-eyebrow {
+  margin: 0 0 7px;
+  color: var(--wizard-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.register-heading h1,
+.details-title {
+  margin: 0;
+  color: var(--wizard-ink);
+  font: 700 clamp(28px, 4vw, 34px)/1.2 "Lora", Georgia, serif;
+  letter-spacing: -.02em;
+}
+
+.register-intro {
+  margin: 8px 0 0;
+  color: var(--wizard-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.register-progress {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.register-progress li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 12px;
+  color: #aa9a9a;
+  font-size: 12px;
+}
+
+.register-progress li::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 4px;
+  background: #eee6e2;
+  content: "";
+}
+
+.register-progress li.is-current::before,
+.register-progress li.is-complete::before {
+  background: var(--wizard-accent);
+}
+
+.register-progress li > span {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid #e8dcda;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.register-progress li.is-current,
+.register-progress li.is-complete {
+  color: var(--wizard-accent);
+}
+
+.register-progress li.is-current > span,
+.register-progress li.is-complete > span {
+  border-color: var(--wizard-accent);
+  color: #fff;
+  background: var(--wizard-accent);
+}
+
+.step-caption {
+  margin: 0 0 15px;
+  color: #8b7a7d;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.details-title {
+  margin: -7px 0 19px;
+  font-size: 24px;
+}
+
+.role-group {
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.role-group legend,
+.register-wizard .form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #4a3c3e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.role-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.role-option {
+  position: relative;
+  display: grid;
+  min-height: 42px;
+  place-items: center;
+  border: 1px solid var(--wizard-line);
+  border-radius: 8px;
+  color: #695a5c;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color .16s ease, color .16s ease, background .16s ease;
+}
+
+.role-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.role-option:has(input:checked) {
+  border-color: var(--wizard-accent);
+  color: var(--wizard-accent-dark);
+  background: var(--wizard-accent-soft);
+}
+
+.role-option:has(input:focus-visible) {
+  outline: 3px solid color-mix(in srgb, var(--wizard-accent) 22%, transparent);
+  outline-offset: 2px;
+}
+
+.register-wizard .form-group {
+  min-width: 0;
+  margin: 0 0 14px;
+}
+
+.register-wizard .form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.register-wizard .form-group input,
+.register-wizard .form-group select {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 13px;
+  border: 1px solid var(--wizard-line);
+  border-radius: 7px;
+  outline: none;
+  color: var(--wizard-ink);
+  background: #fff;
+  font-size: 14px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.register-wizard .form-group input::placeholder {
+  color: #b7aaab;
+}
+
+.register-wizard .form-group input:focus,
+.register-wizard .form-group select:focus {
+  border-color: var(--wizard-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wizard-accent) 13%, transparent);
+}
+
+.register-wizard .form-group label span,
+.field-help {
+  color: var(--wizard-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.field-help {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* Progressive enhancement leaves both steps usable if JavaScript is unavailable. */
+.register-wizard.is-enhanced .register-step:not(.is-current),
+.register-wizard.is-enhanced .register-role-fields:not(.is-active) {
+  display: none;
+}
+
+.register-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.register-button {
+  display: inline-flex;
+  min-height: 43px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--wizard-accent);
+  border-radius: 999px;
+  padding: 0 20px;
+  color: #fff;
+  background: var(--wizard-accent);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .16s ease, border-color .16s ease, transform .16s ease;
+}
+
+.register-button:hover {
+  border-color: var(--wizard-accent-dark);
+  background: var(--wizard-accent-dark);
+  transform: translateY(-1px);
+}
+
+.register-button--next,
+.register-button--back {
+  min-width: 120px;
+}
+
+.register-button--next {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.register-button--back {
+  border-color: var(--wizard-line);
+  color: #695a5c;
+  background: #fff;
+}
+
+.register-button--back:hover {
+  border-color: #d9c8c7;
+  color: var(--wizard-ink);
+  background: #fffaf8;
+}
+
+.register-login {
+  margin: 17px 0 0;
+  color: var(--wizard-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.register-login a {
+  color: var(--wizard-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-errors,
+.register-success {
+  margin-bottom: 17px;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.register-errors {
+  border: 1px solid #f3d0d5;
+  color: #81263a;
+  background: #fff1f2;
+}
+
+.register-errors p + p {
+  margin-top: 4px;
+}
+
+.register-success {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 24px;
+  color: #21634c;
+  background: #eef8f2;
+  text-align: center;
+}
+
+.register-success > i {
+  font-size: 26px;
+}
+
+.register-success .register-button {
+  margin-top: 3px;
+}
+
+.register-actions .register-button:last-child {
+  min-width: 150px;
+}
+
+@media (max-width: 520px) {
+  .register-wizard-page {
+    min-height: calc(100vh - 82px);
+    place-items: start center;
+    padding: 22px 13px 32px;
+  }
+
+  .register-wizard {
+    padding: 23px 19px;
+    border-radius: 13px;
+  }
+
+  .register-wizard .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .register-actions {
+    position: sticky;
+    bottom: 0;
+    padding-top: 12px;
+    background: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
