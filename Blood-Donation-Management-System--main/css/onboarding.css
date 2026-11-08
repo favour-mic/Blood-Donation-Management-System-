@@ -1,0 +1,43 @@
+.onboarding-page {
+  align-items: flex-start;
+  padding-top: 48px;
+}
+
+.onboarding-card {
+  max-width: 720px;
+}
+
+.onboarding-card h1 {
+  margin-bottom: 10px;
+}
+
+.onboarding-card > p:not(.register-eyebrow) {
+  margin: 0 0 24px;
+  color: #6f6264;
+  line-height: 1.7;
+}
+
+.onboarding-card .field-help {
+  display: block;
+  margin-top: 6px;
+  color: #6f6264;
+}
+
+.onboarding-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 24px;
+  background: #990011;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .onboarding-page {
+    padding: 28px 14px;
+  }
+}

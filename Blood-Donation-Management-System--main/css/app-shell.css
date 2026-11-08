@@ -1,0 +1,434 @@
+:root {
+  --app-ink: #302226;
+  --app-muted: #8b7c80;
+  --app-line: #eee2e3;
+  --app-paper: #fbf6f3;
+  --app-white: #fff;
+  --app-red: #8d102d;
+  --app-red-dark: #620b23;
+  --app-red-soft: #fbeaed;
+  --app-teal: #237f78;
+  --app-shadow: 0 12px 32px rgb(57 21 30 / 6%);
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; }
+body.app-shell {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--app-ink);
+  background: var(--app-paper);
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body.app-shell a { color: inherit; text-decoration: none; }
+body.app-shell button,
+body.app-shell input,
+body.app-shell select,
+body.app-shell textarea { font: inherit; }
+.app-frame { min-height: 100vh; }
+.app-sidebar {
+  position: fixed;
+  z-index: 30;
+  inset: 0 auto 0 0;
+  display: flex;
+  width: 258px;
+  flex-direction: column;
+  padding: 25px 17px 18px;
+  color: #fff;
+  background: linear-gradient(180deg, #71102b, #500a20);
+}
+.app-brand { display: flex; align-items: center; gap: 11px; padding: 0 8px 30px; font: 700 18px/1.1 "Lora", Georgia, serif; }
+.app-brand small { display: block; margin-top: 5px; color: #edcbd2; font: 500 10px "Poppins", sans-serif; letter-spacing: .03em; }
+.app-brand__mark { display: grid; width: 39px; height: 39px; place-items: center; border: 1px solid #ffffff48; border-radius: 12px; color: #fff; background: #ffffff18; font-size: 19px; }
+.app-sidebar__label { padding: 0 12px 11px; color: #dbaab6; font-size: 9px; font-weight: 800; letter-spacing: .17em; }
+.app-nav { display: grid; gap: 6px; }
+.app-nav a { display: flex; min-height: 45px; align-items: center; gap: 12px; padding: 0 13px; border: 1px solid transparent; border-radius: 10px; color: #f3dfe3; font-size: 12px; font-weight: 600; transition: background .16s ease, color .16s ease; }
+.app-nav a i { width: 17px; color: #dfaeba; text-align: center; }
+.app-nav a:hover { background: #ffffff12; }
+.app-nav a.is-active { border-color: #ffffff20; color: #fff; background: #ffffff1b; box-shadow: inset 3px 0 #f9bd96; }
+.app-nav a.is-active i { color: #ffd0ac; }
+.app-sidebar__bottom { margin-top: auto; padding-top: 17px; border-top: 1px solid #ffffff24; }
+.app-sidebar__identity { display: flex; min-width: 0; align-items: center; gap: 10px; padding: 4px 5px 15px; }
+.app-sidebar__identity > span:last-child { min-width: 0; }
+.app-sidebar__identity strong,.app-sidebar__identity small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-sidebar__identity strong { max-width: 175px; font-size: 11px; }
+.app-sidebar__identity small { margin-top: 4px; color: #e4bac4; font-size: 10px; }
+.app-avatar { display: grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; border: 1px solid #ffffff45; border-radius: 50%; color: #fff; background: #ffffff1c; font-size: 12px; font-weight: 800; }
+.app-avatar--small { width: 29px; height: 29px; flex-basis: 29px; color: var(--app-red); border-color: #edd9dc; background: var(--app-red-soft); }
+.app-signout { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 9px; color: #f1dce1 !important; font-size: 11px; font-weight: 700; }
+.app-signout:hover { background: #ffffff12; }
+.app-workspace { min-height: 100vh; margin-left: 258px; }
+.app-topbar { position: sticky; z-index: 10; top: 0; display: flex; min-height: 64px; align-items: center; justify-content: space-between; padding: 0 clamp(20px, 4vw, 48px); border-bottom: 1px solid var(--app-line); background: rgb(255 253 251 / 94%); backdrop-filter: blur(12px); }
+.app-topbar__section { color: var(--app-muted); font-size: 11px; font-weight: 700; }
+.app-topbar__account { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 700; }
+.app-topbar__account > i { margin-left: 3px; color: var(--app-muted); font-size: 9px; }
+.app-menu-toggle { display: none; width: 38px; height: 38px; border: 1px solid var(--app-line); border-radius: 10px; color: var(--app-red); background: #fff; }
+.app-content { width: min(1440px, 100%); min-height: calc(100vh - 64px); margin: 0 auto; padding: clamp(22px, 4vw, 42px) clamp(20px, 4vw, 48px) 56px; }
+.app-content .role-main { min-height: auto; padding: 0; background: transparent; }
+.app-content .role-container { width: min(1160px, 100%); }
+.app-content .role-title,.app-content .page-title,.app-content .submit-title { color: var(--app-ink); font: 700 clamp(30px, 3.5vw, 44px)/1.12 "Lora", Georgia, serif; letter-spacing: -.025em; }
+.app-content .role-kicker,.app-content .page-label { color: var(--app-red); }
+.app-content .role-subtitle { margin: 9px 0 22px; color: var(--app-muted); font-size: 13px; line-height: 1.65; }
+.app-content .role-tabs,.app-content .page-navigation,.app-content .request-navigation { display: flex; flex-wrap: wrap; gap: 7px; margin: 21px 0 24px; }
+.app-content .role-tabs a,.app-content .page-nav-button,.app-content .request-nav-button { margin: 0; border: 1px solid var(--app-line); border-radius: 9px; padding: 10px 14px; color: #66565a; background: #fff; font-size: 11px; font-weight: 700; }
+.app-content .role-tabs a.is-active,.app-content .page-nav-button.active,.app-content .request-nav-button.active { border-color: var(--app-red); color: #fff; background: var(--app-red); }
+.app-content .role-panel,.app-content .dashboard-panel,.app-content .inventory-card,.app-content .role-form,.app-content .search-box,.app-content .request-form-card,.app-content .request-card,.app-content .donor-card { border: 1px solid var(--app-line); border-radius: 14px; background: var(--app-white); box-shadow: var(--app-shadow); }
+.app-content .role-panel,.app-content .dashboard-panel,.app-content .role-form { padding: 21px; }
+.app-content .role-panel h2,.app-content .dashboard-panel h2 { color: var(--app-ink); font: 700 18px "Lora", Georgia, serif; }
+.app-content .role-panel p,.app-content .dashboard-panel p { color: var(--app-muted); line-height: 1.6; }
+.app-content .role-grid { gap: 15px; }
+.app-content .metric-card { min-height: 142px; }
+.app-content .metric-icon { color: var(--app-red); background: var(--app-red-soft); }
+.app-content .metric-value { color: var(--app-ink); font-size: 31px; }
+.app-content .metric-label { font-size: 11px; }
+.app-content .dashboard-columns { gap: 15px; margin-top: 15px; }
+.app-content .manage-button,.app-content .role-button,.app-content .inventory-card form button,.app-content .search-button,.app-content .request-button,.app-content .submit-request-button,.app-content .app-button { min-height: 39px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 9px; padding: 0 15px; color: #fff; background: var(--app-red); font-size: 11px; font-weight: 800; cursor: pointer; }
+.app-content .manage-button:hover,.app-content .role-button:hover,.app-content .inventory-card form button:hover,.app-content .search-button:hover,.app-content .request-button:hover,.app-content .submit-request-button:hover,.app-content .app-button:hover { background: var(--app-red-dark); }
+.app-content .inventory-card form button { width: 100%; }
+.app-content .role-form input,.app-content .role-form select,.app-content .inventory-card form input,.app-content .form-group input,.app-content .form-group select,.app-content .search-field input,.app-content .search-field select,.app-content .request-form-card input,.app-content .request-form-card select { min-height: 42px; border: 1px solid var(--app-line); border-radius: 8px; padding: 9px 11px; color: var(--app-ink); background: #fff; }
+.app-content .role-form input:focus,.app-content .role-form select:focus,.app-content input:focus,.app-content select:focus,.app-content textarea:focus { outline: 3px solid #8d102d20; border-color: var(--app-red); }
+.app-content .role-table-wrap { overflow-x: auto; border: 1px solid var(--app-line); border-radius: 14px; background: #fff; box-shadow: var(--app-shadow); }
+.app-content .role-table { min-width: 620px; border-collapse: collapse; }
+.app-content .role-table th { background: #f9edef; color: #6f1b31; }
+.app-content .role-table td { border-color: #f0e7e7; }
+.app-content .role-message,.app-content .success-message { border: 1px solid #d5eade; border-radius: 9px; padding: 11px 14px; color: #256648; background: #eff9f1; }
+.app-content .error-message { border: 1px solid #f0ced1; border-radius: 9px; padding: 11px 14px; color: #7b2032; background: #fff1f1; }
+.app-content .hospital-alert { border-color: #f0d9c7; color: #8f5835; background: #fff4eb; }
+.app-content .availability { color: var(--app-teal); }
+.app-content .inventory-card form button { color: #fff; background: var(--app-red); }
+.app-sidebar-backdrop[hidden] { display: none; }
+.app-notifications { position: relative; }
+.app-notifications__button { position: relative; display: grid; width: 35px; height: 35px; place-items: center; border: 1px solid var(--app-line); border-radius: 10px; color: var(--app-red); background: #fff; cursor: pointer; }
+.app-notifications__button span { position: absolute; top: -5px; right: -5px; display: grid; min-width: 17px; height: 17px; place-items: center; border: 2px solid #fff; border-radius: 99px; color: #fff; background: var(--app-red); font-size: 9px; }
+.app-notifications__panel { position: absolute; z-index: 15; top: 45px; right: -44px; width: min(330px, calc(100vw - 28px)); max-height: 370px; overflow: auto; border: 1px solid var(--app-line); border-radius: 12px; padding: 14px; background: #fff; box-shadow: var(--app-shadow); }
+.app-notifications__panel > strong { display: block; padding-bottom: 10px; border-bottom: 1px solid var(--app-line); font-size: 12px; }
+.app-notifications__panel > p { color: var(--app-muted); font-size: 11px; }
+.app-notifications__panel a { display: block; padding: 10px 2px; border-bottom: 1px solid #f4ebec; }
+.app-notifications__panel a span,.app-notifications__panel a small { display: block; }
+.app-notifications__panel a span { font-size: 11px; font-weight: 800; }
+.app-notifications__panel a small { margin-top: 4px; color: var(--app-muted); font-size: 10px; }
+.app-content table,.app-content thead,.app-content tbody,.app-content tr,.app-content th,.app-content td { border-color: var(--app-line); border-width: 0; }
+.app-content .role-main { color: var(--app-ink); }
+.app-content .panel-eyebrow { margin: 0 0 5px; color: var(--app-red); font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.app-content .panel-heading-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.app-content .panel-heading-row h2 { margin: 0; }
+.app-content .app-empty { padding: 14px 0; color: var(--app-muted); font-size: 12px; line-height: 1.6; }
+.app-content .inventory-row { gap: 12px; }
+.app-content .inventory-meter { height: 7px; flex: 1; overflow: hidden; border-radius: 99px; background: #f4eaeb; }
+.app-content .inventory-meter > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #8d102d, #d46b7d); }
+.app-content .inventory-meter > span.is-low { background: #dc7958; }
+.app-content .role-form h2 { margin: 3px 0 18px; font: 700 20px "Lora", Georgia, serif; }
+.app-content .appointment-form { margin: 0 0 18px; }
+.app-content .app-table-section { margin-top: 16px; }
+.app-content .inline-action { display: flex; min-width: 188px; align-items: center; gap: 6px; }
+.app-content .inline-action select { min-width: 98px; min-height: 35px; }
+.app-content .inline-action .role-button { min-height: 35px; padding-inline: 10px; }
+.app-content .role-button:disabled,.app-content .app-button:disabled { cursor: not-allowed; opacity: .55; }
+.app-status,.request-status,.account-status { display: inline-flex; align-items: center; border-radius: 99px; padding: 5px 9px; color: #78652f; background: #fff4d9; font-size: 9px; font-weight: 800; text-transform: capitalize; }
+.app-status--completed,.request-status--fulfilled,.account-status--active { color: #267349; background: #e8f6ed; }
+.app-status--cancelled,.app-status--no-show,.request-status--cancelled,.account-status--suspended { color: #9a3b46; background: #fae9eb; }
+.app-status--scheduled,.request-status--pending,.account-status--pending { color: #856124; background: #fff4df; }
+.request-status--matched { color: #2d6880; background: #e9f5fa; }
+.recipient-page { width: min(1160px, 100%); margin: 0 auto; }
+.recipient-page__heading,.admin-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+.recipient-page .role-subtitle { max-width: 640px; margin-bottom: 0; }
+.recipient-page .page-label { margin: 0 0 8px; color: var(--app-red); font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.recipient-search { display: grid; grid-template-columns: minmax(180px, .8fr) minmax(220px, 1fr) auto; align-items: end; gap: 15px; margin: 0 0 28px; padding: 18px; }
+.app-content .recipient-search .search-field label,.app-content .request-form-card label { display: block; margin-bottom: 7px; color: #433438; font-size: 11px; font-weight: 800; }
+.app-content .recipient-search .search-field input,.app-content .recipient-search .search-field select,.app-content .request-form-card input,.app-content .request-form-card select { width: 100%; }
+.recipient-results-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+.recipient-results-heading h2 { margin: 0; font: 700 18px "Lora", Georgia, serif; }
+.privacy-note { color: var(--app-muted); font-size: 10px; }
+.privacy-note i { margin-right: 4px; color: var(--app-teal); }
+.app-content .donor-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+.app-content .donor-card { display: grid; grid-template-columns: 54px minmax(0, 1fr); align-items: center; gap: 0 14px; padding: 17px; }
+.donor-card__group { grid-row: span 2; display: grid; width: 52px; height: 52px; place-items: center; border-radius: 15px; color: var(--app-red); background: var(--app-red-soft); font: 700 19px "Lora", Georgia, serif; }
+.donor-card__status { color: var(--app-teal); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.donor-card__status i { margin-right: 4px; }
+.app-content .donor-card h2 { margin: 5px 0; font: 700 15px "Lora", Georgia, serif; }
+.app-content .donor-card p { margin: 0; color: var(--app-muted); font-size: 10px; }
+.app-content .donor-card .request-button { grid-column: 2; width: fit-content; min-height: 33px; margin-top: 12px; }
+.recipient-empty { display: grid; justify-items: center; padding: 44px 20px; border: 1px dashed #e8d6d9; border-radius: 14px; background: #fff; text-align: center; }
+.recipient-empty > span { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; color: var(--app-red); background: var(--app-red-soft); }
+.recipient-empty h2 { margin: 14px 0 5px; font: 700 20px "Lora", Georgia, serif; }
+.recipient-empty p { max-width: 460px; color: var(--app-muted); font-size: 12px; line-height: 1.6; }
+.app-content .request-form-card { width: min(760px, 100%); padding: 24px; }
+.app-content .request-form-card .form-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+.app-content .request-form-card .form-group { margin-bottom: 17px; }
+.app-content .request-form-card button { gap: 8px; min-width: 185px; }
+.field-optional { color: var(--app-muted); font-weight: 500; }
+.request-list { display: grid; gap: 13px; }
+.app-content .request-card { padding: 20px; }
+.request-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.request-card__top h2 { margin: 4px 0; font: 700 19px "Lora", Georgia, serif; }
+.request-card__top h2 span { color: var(--app-red); }
+.request-card__top p:not(.panel-eyebrow) { margin: 0; color: var(--app-muted); font-size: 10px; }
+.request-progress { margin: 22px 0 11px; }
+.request-progress__line { height: 5px; overflow: hidden; border-radius: 99px; background: #f2e8e9; }
+.request-progress__line span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--app-red),#d46b7d); }
+.request-progress__labels { display: flex; justify-content: space-between; margin-top: 7px; color: #a4989a; font-size: 9px; }
+.request-progress__labels .is-complete { color: var(--app-red); font-weight: 800; }
+.request-card__meta { margin: 0; color: var(--app-muted); font-size: 10px; }
+.request-card__meta strong { color: var(--app-ink); }
+.admin-dashboard { width: min(1240px,100%); margin: auto; }
+.admin-heading { align-items: center; }
+.admin-heading .role-title { margin: 0; }
+.admin-heading .role-subtitle { margin: 8px 0 0; }
+.admin-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 13px; margin-bottom: 15px; }
+.admin-metric { min-width: 0; display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 2px 10px; padding: 16px; border: 1px solid var(--app-line); border-radius: 13px; background: #fff; box-shadow: var(--app-shadow); }
+.admin-metric__icon { grid-row: span 3; display: grid; width: 36px; height: 36px; place-items: center; border-radius: 11px; color: var(--app-red); background: var(--app-red-soft); font-size: 13px; }
+.admin-metric__label { color: var(--app-muted); font-size: 9px; font-weight: 700; }
+.admin-metric > strong { font: 700 25px "Lora", Georgia, serif; }
+.admin-metric > small { overflow: hidden; color: #a19698; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.admin-charts { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(260px,1fr); gap: 14px; }
+.admin-chart-card,.admin-table-card { min-width: 0; padding: 18px; border: 1px solid var(--app-line); border-radius: 14px; background: #fff; box-shadow: var(--app-shadow); }
+.admin-chart-card--wide { grid-column: auto; }
+.admin-chart-card__heading,.admin-table-card__heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.admin-chart-card__heading h2,.admin-table-card__heading h2 { margin: 0; font: 700 17px "Lora", Georgia, serif; }
+.admin-chart-card__heading > a { color: var(--app-red); font-size: 10px; font-weight: 800; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 11px; color: var(--app-muted); font-size: 9px; }
+.chart-legend span { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--app-red); }
+.legend-dot--donations { background: #d9a25f; }
+.admin-line-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart-grid-line { stroke: #f0e7e8; stroke-dasharray: 3 5; }
+.chart-axis-label { fill: #98898c; font: 9px "Poppins", sans-serif; text-anchor: middle; }
+.chart-line { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3; }
+.chart-line--requests { stroke: var(--app-red); }
+.chart-line--donations { stroke: #d9a25f; }
+.role-chart-row { display: flex; align-items: center; justify-content: center; gap: 20px; min-height: 144px; }
+.role-donut { display: grid; width: 126px; height: 126px; flex: 0 0 126px; place-items: center; border-radius: 50%; }
+.role-donut > span { display: grid; width: 87px; height: 87px; align-content: center; justify-items: center; border-radius: 50%; background: #fff; font: 700 23px "Lora", Georgia, serif; }
+.role-donut small { margin-top: 3px; color: var(--app-muted); font: 9px "Poppins", sans-serif; }
+.role-chart-legend { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.role-chart-legend li,.role-chart-legend li > span { display: flex; align-items: center; gap: 7px; }
+.role-chart-legend li { justify-content: space-between; gap: 16px; font-size: 10px; }
+.role-chart-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.role-chart-legend strong { font-size: 10px; }
+.admin-stock-chart { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 15px 19px; }
+.admin-stock-chart__item > div:first-child { display: flex; justify-content: space-between; gap: 5px; margin-bottom: 6px; font-size: 10px; }
+.admin-stock-chart__item > div:first-child span { color: var(--app-muted); font-size: 9px; }
+.admin-stock-chart__track { height: 7px; overflow: hidden; border-radius: 9px; background: #f4e9eb; }
+.admin-stock-chart__track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#8d102d,#d46b7d); }
+.pending-account { display: flex; align-items: center; gap: 9px; padding: 10px 0; border-top: 1px solid #f3eaeb; }
+.pending-account > span:last-child { min-width: 0; }
+.pending-account strong,.pending-account small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pending-account strong { font-size: 10px; }
+.pending-account small { max-width: 210px; margin-top: 4px; color: var(--app-muted); font-size: 9px; }
+.admin-filter { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0; }
+.admin-filter a { border: 1px solid var(--app-line); border-radius: 8px; padding: 9px 12px; color: #69585c; background: #fff; font-size: 10px; font-weight: 700; }
+.admin-filter a.is-active { border-color: var(--app-red); color: #fff; background: var(--app-red); }
+.admin-table-card__heading > span { color: var(--app-muted); font-size: 9px; }
+.admin-users-table { min-width: 900px !important; }
+.app-content .admin-users-table th { padding: 12px; }
+.app-content .admin-users-table td { padding: 12px; vertical-align: middle; }
+.table-secondary { display: block; margin-top: 5px; color: var(--app-muted); font-size: 9px; font-weight: 400; }
+.admin-role-tag { display: inline-flex; border-radius: 99px; padding: 5px 8px; color: #8d102d; background: #fbeaed; font-size: 9px; font-weight: 800; }
+.admin-role-tag--recipient { color: #536486; background: #edf0f7; }
+.admin-role-tag--hospital { color: #237f78; background: #e8f5f2; }
+.admin-account-action { min-width: 80px; }
+.app-content .admin-account-action .app-button { min-height: 31px; padding: 0 10px; }
+.app-content .app-button--quiet { border: 1px solid #e9d9dc; color: #7f293d; background: #fff; }
+.app-content .app-button--quiet:hover { color: #fff; }
+@media (max-width: 900px) {
+  .app-sidebar { width: 232px; }
+  .app-workspace { margin-left: 232px; }
+  .admin-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .admin-charts { grid-template-columns: 1fr; }
+  .admin-chart-card--wide { grid-column: auto; }
+}
+@media (max-width: 700px) {
+  .app-sidebar { width: min(290px, 84vw); transform: translateX(-102%); transition: transform .2s ease; }
+  .app-sidebar.is-open { transform: translateX(0); }
+  .app-workspace { margin-left: 0; }
+  .app-topbar { justify-content: flex-start; gap: 12px; padding-inline: 16px; }
+  .app-menu-toggle { display: inline-grid; place-items: center; }
+  .app-topbar__account { margin-left: auto; }
+  .app-topbar__account > span:not(.app-avatar),.app-topbar__account > i { display: none; }
+  .app-content { padding: 24px 16px 40px; }
+  .app-sidebar-backdrop:not([hidden]) { position: fixed; z-index: 20; inset: 0; display: block; background: rgb(31 12 19 / 48%); }
+  .app-content .role-grid,.app-content .dashboard-columns,.app-content .inventory-grid { grid-template-columns: 1fr; }
+  .app-content .role-title,.app-content .page-title,.app-content .submit-title { font-size: clamp(27px, 8vw, 36px); }
+  .recipient-page__heading,.admin-heading { align-items: flex-start; flex-direction: column; }
+  .recipient-search { grid-template-columns: 1fr; }
+  .app-content .donor-results { grid-template-columns: 1fr; }
+  .app-content .request-form-card .form-row { grid-template-columns: 1fr; gap: 0; }
+  .admin-metrics { grid-template-columns: 1fr 1fr; }
+  .admin-stock-chart { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .role-chart-row { gap: 13px; }
+  .role-donut { width: 105px; height: 105px; flex-basis: 105px; }
+  .role-donut > span { width: 73px; height: 73px; font-size: 20px; }
+  .app-content .request-card { padding: 16px; }
+  .request-card__top { flex-direction: column; }
+  .app-content .inline-action { min-width: 0; }
+}
+@media (max-width: 380px) {
+  .admin-metrics { grid-template-columns: 1fr; }
+}
+
+/* The V3 workspaces share one cream-and-wine system with restrained role accents. */
+body.app-shell--admin,
+body.app-shell--donor {
+  --role-accent: #8d102d;
+  --role-accent-dark: #620b23;
+  --role-accent-soft: #fbeaed;
+}
+body.app-shell--recipient {
+  --role-accent: #a92343;
+  --role-accent-dark: #801a34;
+  --role-accent-soft: #f9e9ed;
+}
+body.app-shell--hospital {
+  --role-accent: #176c64;
+  --role-accent-dark: #0e514b;
+  --role-accent-soft: #e7f4f1;
+}
+.app-sidebar {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--role-accent) 90%, #fff), var(--role-accent-dark));
+}
+body.app-shell--donor .app-sidebar,
+body.app-shell--recipient .app-sidebar,
+body.app-shell--hospital .app-sidebar {
+  background: linear-gradient(180deg, #71102b, #500a20);
+}
+.app-nav a.is-active {
+  box-shadow: inset 3px 0 #f9bd96;
+}
+.app-content .role-kicker,
+.app-content .page-label,
+.app-content .panel-eyebrow,
+.app-content .recipient-page .page-label {
+  color: var(--role-accent);
+}
+.app-content .app-button,
+.app-content .manage-button,
+.app-content .role-button,
+.app-content .search-button,
+.app-content .request-button,
+.app-content .submit-request-button,
+.admin-filter a.is-active {
+  background: var(--role-accent);
+}
+.app-content .app-button:hover,
+.app-content .manage-button:hover,
+.app-content .role-button:hover,
+.app-content .search-button:hover,
+.app-content .request-button:hover,
+.app-content .submit-request-button:hover,
+.admin-filter a.is-active:hover {
+  background: var(--role-accent-dark);
+}
+.app-content .metric-icon,
+.app-content .donor-card__group {
+  color: var(--role-accent);
+  background: var(--role-accent-soft);
+}
+.app-content .inventory-meter > span,
+.request-progress__line span,
+.admin-stock-chart__track span {
+  background: linear-gradient(90deg, var(--role-accent-dark), var(--role-accent));
+}
+.app-topbar__section,
+.app-topbar__account,
+.app-nav a,
+.app-content .role-tabs a,
+.app-content .page-nav-button,
+.app-content .request-nav-button,
+.app-content .role-table,
+.app-content .request-card,
+.app-content .dashboard-panel,
+.app-content .admin-chart-card {
+  font-family: "Inter", sans-serif;
+}
+.app-nav a { font-size: 13px; }
+.app-topbar__section,
+.app-topbar__account { font-size: 12px; }
+.app-content .role-subtitle { font-size: 14px; }
+.app-content .panel-eyebrow { font-size: 10px; }
+.app-content .role-panel h2,
+.app-content .dashboard-panel h2,
+.recipient-results-heading h2,
+.admin-chart-card__heading h2,
+.admin-table-card__heading h2,
+.app-content .request-card__top h2 {
+  font-family: "Inter", sans-serif;
+}
+.app-content .role-table { font-size: 12px; }
+.app-content .role-table th { font-size: 11px; }
+.app-content .app-button,
+.app-content .manage-button,
+.app-content .role-button,
+.app-content .search-button,
+.app-content .request-button,
+.app-content .submit-request-button { font-size: 12px; }
+
+@media (max-width: 700px) {
+  .app-content .role-subtitle { font-size: 13px; }
+  .app-content .role-table { font-size: 11px; }
+}
+
+/* Inter keeps every signed-in role consistent; larger minimums improve scanability. */
+body.app-shell :not(i) {
+  font-family: "Inter", sans-serif;
+}
+body.app-shell .app-content :not(i) {
+  font-family: "Inter", sans-serif;
+}
+body.app-shell .app-nav a { font-size: 14px; }
+body.app-shell .app-sidebar__label { font-size: 11px; }
+body.app-shell .app-sidebar__identity strong { font-size: 13px; }
+body.app-shell .app-sidebar__identity small,
+body.app-shell .app-signout { font-size: 12px; }
+body.app-shell .app-topbar__section,
+body.app-shell .app-topbar__account { font-size: 13px; }
+body.app-shell .app-content :is(
+  p,
+  li,
+  label,
+  input,
+  select,
+  textarea,
+  button,
+  td,
+  th,
+  small,
+  .metric-label,
+  .panel-eyebrow,
+  .page-label,
+  .role-kicker,
+  .role-tabs a,
+  .page-nav-button,
+  .request-nav-button,
+  .role-pill,
+  .role-status,
+  .privacy-note,
+  .donor-card__status,
+  .admin-metric__label,
+  .admin-metric > small,
+  .chart-legend,
+  .role-chart-legend li,
+  .request-card__meta,
+  .request-progress__labels,
+  .inventory-units,
+  .app-button,
+  .manage-button,
+  .role-button,
+  .search-button,
+  .request-button,
+  .submit-request-button
+) {
+  font-size: max(14px, 1em);
+}
+body.app-shell .app-content .role-title,
+body.app-shell .app-content .page-title,
+body.app-shell .app-content .submit-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+}
+body.app-shell .app-content :is(h2, h3) {
+  font-size: max(21px, 1.12em);
+}
+body.app-shell .chart-axis-label { font: 12px "Inter", sans-serif; }

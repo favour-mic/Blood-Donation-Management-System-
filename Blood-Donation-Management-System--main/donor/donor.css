@@ -1,0 +1,289 @@
+:root {
+  --role-red: #b00016;
+  --role-ink: #241a1b;
+  --role-muted: #877a7b;
+  --role-line: #eadbda;
+  --role-paper: #fcf8f7;
+  --role-green: #258c5b;
+  --role-green-bg: #e1f3e9;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--role-paper);
+  color: var(--role-ink);
+  font-family: "Poppins", sans-serif;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.role-header {
+  background: #fffdfc;
+  border-bottom: 1px solid var(--role-line);
+}
+.role-header__inner {
+  width: min(1080px, calc(100% - 48px));
+  min-height: 70px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font:
+    700 22px/1 "Lora",
+    serif;
+}
+.brand i {
+  color: var(--role-red);
+  font-size: 26px;
+}
+.role-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.role-user {
+  color: var(--role-muted);
+  font-weight: 600;
+}
+.role-logout {
+  border: 1px solid var(--role-line);
+  border-radius: 999px;
+  padding: 8px 17px;
+}
+.role-main {
+  min-height: calc(100vh - 70px);
+  padding: 38px 0 70px;
+}
+.role-container {
+  width: min(1080px, calc(100% - 48px));
+  margin: auto;
+}
+.role-kicker {
+  margin: 0 0 3px;
+  color: var(--role-red);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.role-title {
+  margin: 0;
+  font:
+    700 clamp(42px, 5vw, 58px)/1.05 "Lora",
+    serif;
+}
+.role-subtitle {
+  margin: 18px 0 16px;
+  color: var(--role-muted);
+  font-size: 17px;
+}
+.role-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 35px;
+}
+.role-tabs a {
+  border: 1px solid var(--role-line);
+  border-radius: 999px;
+  padding: 8px 17px;
+  color: #4f4546;
+  font-size: 13px;
+  font-weight: 700;
+}
+.role-tabs a + a {
+  margin-left: -1px;
+}
+.role-tabs a.is-active {
+  z-index: 1;
+  border-color: var(--role-ink);
+  background: var(--role-ink);
+  color: #fff;
+}
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 23px;
+}
+.role-panel {
+  min-height: 155px;
+  border: 1px solid var(--role-line);
+  border-radius: 11px;
+  background: #fff;
+  padding: 24px;
+}
+.role-panel h2 {
+  margin: 0 0 8px;
+  font:
+    700 18px/1.2 "Lora",
+    serif;
+}
+.role-panel p {
+  margin: 0;
+  color: var(--role-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.role-panel form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+}
+.role-switch {
+  width: 45px;
+  height: 25px;
+  padding: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: #ddd;
+  cursor: pointer;
+}
+.role-switch span {
+  display: block;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.18s ease;
+}
+.role-switch.is-on {
+  background: var(--role-green);
+}
+.role-switch.is-on span {
+  transform: translateX(20px);
+}
+.role-status {
+  color: var(--role-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.role-status.is-on {
+  color: var(--role-green);
+}
+.role-pill {
+  display: inline-block;
+  margin-top: 4px;
+  border-radius: 999px;
+  padding: 5px 12px;
+  color: var(--role-green);
+  background: var(--role-green-bg);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.role-impact {
+  display: block;
+  margin-top: 4px;
+  color: var(--role-red);
+  font:
+    700 38px/1 "Lora",
+    serif;
+}
+.role-table-wrap {
+  overflow: hidden;
+  border: 1px solid var(--role-line);
+  border-radius: 14px;
+  background: #fff;
+}
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.role-table th {
+  padding: 13px 16px;
+  background: var(--role-red);
+  color: #fff;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.role-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--role-line);
+  color: #675b5d;
+}
+.role-form {
+  width: min(520px, 100%);
+  border: 1px solid var(--role-line);
+  border-radius: 11px;
+  background: #fff;
+  padding: 22px;
+}
+.role-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 0;
+}
+.role-form .full {
+  grid-column: 1/-1;
+}
+.role-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.role-form input,
+.role-form select {
+  width: calc(100% - 8px);
+  border: 1px solid var(--role-line);
+  border-radius: 7px;
+  padding: 10px;
+  color: #827678;
+  background: #fff;
+  font: inherit;
+}
+.role-button {
+  margin-top: 16px;
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 20px;
+  background: var(--role-red);
+  color: #fff;
+  font:
+    700 13px "Poppins",
+    sans-serif;
+  cursor: pointer;
+}
+.role-message {
+  margin: 12px 0;
+  color: var(--role-green);
+  font-size: 13px;
+  font-weight: 700;
+}
+@media (max-width: 700px) {
+  .role-header__inner,
+  .role-container {
+    width: calc(100% - 32px);
+  }
+  .role-user {
+    display: none;
+  }
+  .role-grid {
+    grid-template-columns: 1fr;
+  }
+  .role-table {
+    min-width: 600px;
+  }
+  .role-table-wrap {
+    overflow-x: auto;
+  }
+  .role-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .role-form .full {
+    grid-column: auto;
+  }
+}
